@@ -1,5 +1,3 @@
-alert('hey!');
-
 // XXX untested
 
 // N.B. The table is a built-in Javascript object, so key lookup
