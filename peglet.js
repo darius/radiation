@@ -19,12 +19,20 @@ function map(f, xs) {
     return result;
 }
 
+function split(s) {
+    var result = [];
+    var tokens = s.split(/\s+/);
+    for (var i = 0; i < tokens.length; ++i)
+        if (tokens[i] !== '')
+            result.push(tokens[i]);
+    return result;
+}
+
 // XXX no r'' literals, so regexes will be a pain.
 // maybe leave them out?
 
 function parseGrammar(grammar, actions) {
-    // XXX whitespace
-    var parts = grammar.split(/ ([A-Za-z_]\w*) += /);
+    var parts = (' '+grammar+' ').split(/\s([A-Za-z_]\w*)\s+=\s/);
     if (parts.length <= 1 || parts[0].trim() !== '')
         throw new BadGrammar("Missing left hand side", parts[0]);
     var rules = {};
@@ -32,9 +40,8 @@ function parseGrammar(grammar, actions) {
         var lhs = parts[i], rhs = parts[i+1];
         if (lhs in rules)
             throw new BadGrammar("Duplicate rule", lhs);
-        var alternatives = (' '+rhs+' ').split(/ /);
-        rules[lhs] = map(function (a) { return a.split(); },
-                         alternatives);
+        var alternatives = (' '+rhs+' ').split(/\s[|]\s/);
+        rules[lhs] = map(split, alternatives);
     }
     var default_rule = parts[1];
     return function(text, rule) {
