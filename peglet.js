@@ -1,3 +1,5 @@
+alert('hey!');
+
 // XXX untested
 
 // N.B. The table is a built-in Javascript object, so key lookup
@@ -36,7 +38,7 @@ function parseGrammar(grammar, actions) {
         rules[lhs] = map(function (a) { return a.split(); },
                          alternatives);
     }
-    var default_rule = parts[1]:
+    var default_rule = parts[1];
     return function(text, rule) {
         return parse(rules, actions, rule || default_rule, text);
     };
