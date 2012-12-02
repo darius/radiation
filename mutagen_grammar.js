@@ -4,22 +4,23 @@ Then have them generate random text.
 XXX incompletely translated from python
 */
 
-var punct = {'.': terminator('.'),
-             '?': terminator('?'),
-             '!': terminator('!'),
-             ',': separator(','),
-             ';': separator(';'),
-             '-': sequence(abut, literal('-'), abut),
-             '--': literal('--')};
+var punct = {'.': Period,
+//             '?': terminator('?'),
+//             '!': terminator('!'),
+             ',': Comma,
+             ';': Semicolon,
+//             '-': sequence(abut, literal('-'), abut),
+             '--': Dash};
 function mkPunct(s) { return punct[s]; }
 
 function mutagenParse(grammar) {
 
-    var rules = {'-a-': a_an,
-                 '-an-': a_an,
-                 '-a-an-': a_an,
-                 '-adjoining-': abut,
-                 '-capitalize-': capitalize};
+    var rules = {'-a-': AAn,
+                 '-an-': AAn,
+                 '-a-an-': AAn,
+                 '-adjoining-': Concat,
+//                 '-capitalize-': capitalize
+                };
 
     parser = parseGrammar("
 grammar = _ rules
@@ -27,21 +28,21 @@ rules   = rule rules |
 
 rule    = name [=] _ exp       hug
 
-exp     = alts                 mk_choice
+exp     = alts                 mkChoice
 alts    = alt [/] _ alts
         | alt
-alt     = \\[ number \\] _ seq mk_weight
-        | seq                  mk_unit
-seq     = factor seq           mk_seq
-        |                      mk_empty
-factor  = name ![=]            mk_ref
-        | punct                mk_punct
+alt     = \\[ number \\] _ seq mkWeight
+        | seq                  mkUnit
+seq     = factor seq           mkSeq
+        |                      mkEmpty
+factor  = name ![=]            mkRef
+        | punct                mkPunct
         | [(] _ exp [)] _
-        | { _ alts } _         mk_shuffle
-        | word { _ alts } _    mk_fixed
-        | word                 mk_literal
-punct   = ([.,;?!]) _
-        | (--?)\\s _
+        | { _ alts } _         mkShuffle
+        | word { _ alts } _    mkFixed
+        | word                 mkLiteral
+punct   = ([.,;]) _
+        | (--)\\s _
 word    = ([A-Za-z0-9']+) _
 
 name    = (-[A-Za-z0-9'-]+-) _
@@ -49,17 +50,17 @@ number  = (\\d+) _             int
 _       = (?:\\s|#.*)*
 ", 
                {hug: hug,
-                int: int,
-                mk_choice : lambda *pairs: pairs[0][0] if 1 == len(pairs) else weighted_choice(dict(pairs)),
-                mk_empty  : lambda: empty,
-                mk_fixed  : lambda tag, *pairs: fixed(tag)(dict(pairs)),
-                mk_literal: literal,
-                mk_punct  : mk_punct,
-                mk_ref    : lambda name: delay(lambda: rules[name]),
-                mk_seq    : lambda p, q: sequence(p, q) if q is not empty else p,
-                mk_shuffle: lambda *pairs: shuffled(dict(pairs)),
-                mk_unit   : lambda p: (p, 1),
-                mk_weight : lambda w, p: (p, w),
+                int: parseInt,
+                mkChoice : lambda *pairs: pairs[0][0] if 1 == len(pairs) else weighted_choice(dict(pairs)),
+                mkEmpty  : lambda: empty,
+                mkFixed  : lambda tag, *pairs: fixed(tag)(dict(pairs)),
+                mkLiteral: literal,
+                mkPunct  : mkPunct,
+                mkRef    : lambda name: delay(lambda: rules[name]),
+                mkSeq    : lambda p, q: sequence(p, q) if q is not empty else p,
+                mkShuffle: lambda *pairs: shuffled(dict(pairs)),
+                mkUnit   : lambda p: (p, 1),
+                mkWeight : lambda w, p: (p, w),
                });
 
 
