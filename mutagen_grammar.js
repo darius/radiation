@@ -30,23 +30,23 @@ rule    = name [=] _ exp       hug
 exp     = alts                 mk_choice
 alts    = alt [/] _ alts
         | alt
-alt     = \[ number \] _ seq   mk_weight
+alt     = \\[ number \\] _ seq mk_weight
         | seq                  mk_unit
 seq     = factor seq           mk_seq
         |                      mk_empty
 factor  = name ![=]            mk_ref
         | punct                mk_punct
-        | \( _ exp \) _
+        | [(] _ exp [)] _
         | { _ alts } _         mk_shuffle
         | word { _ alts } _    mk_fixed
         | word                 mk_literal
 punct   = ([.,;?!]) _
-        | (--?)\s _
+        | (--?)\\s _
 word    = ([A-Za-z0-9']+) _
 
 name    = (-[A-Za-z0-9'-]+-) _
-number  = (\d+) _              int
-_       = (?:\s|#.*)*
+number  = (\\d+) _             int
+_       = (?:\\s|#.*)*
 ", 
                {hug: hug,
                 int: int,
