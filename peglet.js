@@ -84,7 +84,7 @@ function parse(rules, actions, rule, text) {
         }
         else if (actions[token] !== undefined) {
             var f = actions[token];
-            return {ok: true, far: pos, pos: pos, vals: f.apply(null, vals)};
+            return {ok: true, far: pos, pos: pos, vals: [f.apply(null, vals)]};
         }
         else {
             if (/^[A-Za-z_]\w*$/.exec(token) !== null)
@@ -97,7 +97,7 @@ function parse(rules, actions, rule, text) {
             if (match === null || match.index !== pos)
                 return {ok: false, far: pos};
             pos += match[0].length;
-            return {ok: true, far: pos, pos: pos, vals: match.slice(1)};
+            return {ok: true, far: pos, pos: pos, vals: vals.concat(match.slice(1))};
         }
     }
 
