@@ -6,7 +6,7 @@ function memoize(f) {
     var memos = {};
     return function (x, y) {
         var key = x + ',' + y;
-        if (!(key in memos))
+        if (memos[key] === undefined)
             memos[key] = f(x, y);
         return memos[key];
     };
@@ -58,7 +58,7 @@ function parse(rules, actions, rule, text) {
             var state = {ok: true, pos: pos, vals: []};
             var tokens = alternatives[a];
             for (var t = 0; t < tokens.length; ++t) {
-                state = parseToken(token, state.pos, state.vals);
+                state = parseToken(tokens[t], state.pos, state.vals);
                 farthest = Math.max(farthest, state.far);
                 if (!state.ok) break;
             }
@@ -76,13 +76,13 @@ function parse(rules, actions, rule, text) {
             res = parseToken(token.slice(1), pos, vals);
             return {ok: !res.ok, far: pos, pos: pos, vals: vals};
         }
-        else if (token in rules) {
+        else if (rules[token] !== undefined) {
             res = parseRule(token, pos);
             if (res.ok)
                 res.vals = vals.concat(res.vals);
             return res;
         }
-        else if (token in actions) {
+        else if (actions[token] !== undefined) {
             var f = actions[token];
             return {ok: true, far: pos, pos: pos, vals: f.apply(null, vals)};
         }
@@ -91,7 +91,7 @@ function parse(rules, actions, rule, text) {
                 throw new BadGrammar("Missing rule", token);
             if (/^\/.+\/$/.exec(token) !== null)
                 token = token.slice(1, token.length-1);
-            var re = new Regex(token, 'g');
+            var re = new RegExp(token, 'g');
             re.lastIndex = pos;
             var match = re.exec(text);
             if (match === null || match.index !== pos)
