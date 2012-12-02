@@ -51,23 +51,26 @@ _       = (?:\\s|#.*)*
 ", 
                {hug: hug,
                 int: parseInt,
-                mkChoice : lambda *pairs: pairs[0][0] if 1 == len(pairs) else weighted_choice(dict(pairs)),
-                mkEmpty  : lambda: empty,
-                mkFixed  : lambda tag, *pairs: fixed(tag)(dict(pairs)),
-                mkLiteral: literal,
+                mkChoice : lambda *pairs: pairs[0][0] if 1 == len(pairs) else Weighted(dict(pairs)),
+                mkEmpty  : function() { return null; },
+                mkFixed  : lambda tag, *pairs: Fixed(tag, Weighted(dict(pairs))),
+                mkLiteral: function(s) { return s; },
                 mkPunct  : mkPunct,
                 mkRef    : lambda name: delay(lambda: rules[name]),
-                mkSeq    : lambda p, q: sequence(p, q) if q is not empty else p,
-                mkShuffle: lambda *pairs: shuffled(dict(pairs)),
-                mkUnit   : lambda p: (p, 1),
-                mkWeight : lambda w, p: (p, w),
+                mkSeq    : Sequence,
+                mkShuffle: lambda *pairs: Shuffle(dict(pairs)),
+                mkUnit   : function(p) { return [p, 1]; },
+                mkWeight : function(w, p) { return [p, w]; },
                });
 
+    var pairs = parser(grammar);
+    for (var i = 0; i < pairs.length; ++i)
+        rules[pairs[i][0]] = pairs[i][1];
 
-    rules.update(parser(grammar))
     return rules
+}
 
-eg = """
+eg = "
 # Translated from http://www.eblong.com/zarf/mutagen/goreyfate.js
 #   GoreyFate: a Mutagen example.
 #   Written by Andrew Plotkin <erkyrath@eblong.com>
@@ -119,7 +122,8 @@ eg = """
 -name- = gender{ -male-name- / -female-name- }
 -male-name- = Bernard / Joseph / Emmett / Ogden / Eugene / Xerxes / Joshua / Lemuel / Etienne
 -female-name- = Emmalissa / Chloe / Tiffani / Eunice / Zoe / Jennifer / Imelda / Yvette / Melantha
-"""
-rules = parse(eg)
-## mutagen(rules['-root-'], 0)
-#. 'It was three months ago that Etienne, a youth of notable perspicacity, sublimated.'
+";
+rules = mutagenParse(eg);
+var factory = Factory(rules['-root-']);
+var str = factory(0);
+console.log(str);
