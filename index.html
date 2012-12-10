@@ -15,11 +15,50 @@
         <script type="text/javascript">
             function reverseString(string){
                 return string.split("").reverse().join("");
-            
+            }
+            function set(element, text){
+                while (element.firstChild){
+                    element.removeChild(element.firstChild);
+                element.appendChild(document.createTextNode(text))}
+            }
+            function setupUpdater(){
+                var input = document.getElementsByTagName('input')[0],
+                    reversed = document.getElementbyId('reversed'),
+                    count = document.getElementById('charCount'),
+                    orig = document.getElementById(''),
+                    oldText = input.value,
+                    timeout = null;
+
+            }
+            function handleChange(){
+                var newText = input.value;
+                if (newText == oldText){
+                    return;
+                }
+                else {
+                    oldText = newText;
+                }
+                set(reversed, reverse(newText));
+                set(count, 'you wrote ' + newText.length + ' characters. ');
+                set(orig, newText);
+            }
+            function eventHandler(){
+
+                if(timeout) clearTimeout(timeout);
+                timeout = setTimeOut(handleChange, 50);
+            }
+            input.onkeydown = input.onkeyup = input.onclick = eventHandler;
+
+            setupUpdater();
+            document.getElementsByTagName("input")[0].focus();
+
             }
 
-        </script>
 
+            }
+
+
+        </script>
     </head>
     <body>
     <div class="container-fluid">
@@ -33,6 +72,11 @@
         <div class="span4 offset1">   <p>Enter thou thy blasted grammar.</p>
             <br />
             <input type="text"></input>
+            <br />
+            <br />
+            <p id="charCount"></p>
+            <p id="original"></p>
+            <p id="reversed"></p>
         </div>
     </div>
      <div class="row">
