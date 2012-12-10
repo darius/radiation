@@ -52,6 +52,7 @@ function parseGrammar(grammar, actions) {
 function parse(rules, actions, rule, text) {
 
     var parseRule = memoize(function(name, pos) {
+//        console.log('parseRule', name, pos);
         var farthest = pos;
         var alternatives = rules[name];
         for (var a = 0; a < alternatives.length; ++a) {

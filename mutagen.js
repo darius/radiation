@@ -192,6 +192,17 @@ Comma = Object();
 AAn = Object();
 Concat = Object();
 
+function isOK(x) {
+    return (x === Period
+            || x === Semicolon
+            || x === Dash
+            || x === Comma
+            || x === AAn
+            || x === Concat
+            || x === null
+            || typeof(x) === 'function');
+}
+
 /* All the Node types -- except the special cases above -- are functions
    that return functions that return functions. You, the user, call the
    function with a set of arguments. You get back a node function. The
@@ -210,6 +221,7 @@ function Sequence(/*...*/) {
     var argcopy = Array.prototype.slice.call(arguments);
 
     return function(build, cycle) {
+        assert(typeof(build) === 'function');
         var argls = Array();
         for (var ix=0; ix<argcopy.length; ix++) {
             var bfunc = build(argcopy[ix]);
@@ -229,6 +241,7 @@ function Choice(/*...*/) {
     var argcopy = Array.prototype.slice.call(arguments);
 
     return function(build, cycle) {
+        assert(typeof(build) === 'function');
         var argls = Array();
         for (var ix=0; ix<argcopy.length; ix++) {
             var bfunc = build(argcopy[ix]);
@@ -250,6 +263,7 @@ function Shuffle(/*...*/) {
     var seedstore = [-1];
 
     return function(build, cycle) {
+        assert(typeof(build) === 'function');
         var argls = Array();
         for (var ix=0; ix<argcopy.length; ix++) {
             var bfunc = build(argcopy[ix]);
@@ -282,10 +296,14 @@ function Weighted(/*...*/) {
     var argcopy = Array.prototype.slice.call(arguments);
 
     return function(build, cycle) {
+        assert(typeof(build) === 'function');
         var argls = Array();
         var total = 0;
         for (var ix=0; ix<argcopy.length; ix+=2) {
             var weight = argcopy[ix];
+            //console.log('building:');
+//            for (var xxx in build)
+//                console.log('building -->', xxx); //, build[xxx]);
             var bfunc = build(argcopy[ix+1]);
             total += weight;
             argls.push(weight);
@@ -308,6 +326,7 @@ function Weighted(/*...*/) {
 
 function Fixed(label, node) {
     return function(build, cycle) {
+        assert(typeof(build) === 'function');
         var bfunc = build(node, label);
         return function(resarray, seed) {
             bfunc(resarray, seed);
@@ -454,13 +473,18 @@ function Builder() {
         }
         if (!cycle)
             throw "Out of cycle primes";
-        return node(arguments.callee, cycle);
+        if (arguments.callee !== buildfunc)
+            throw "WTF";
+//        console.log('yo', node, cycle);
+        return node(buildfunc, cycle);
     }
     return buildfunc;
 }
 
 function Factory(node) {
     /* Generate a builder for use with this factory. */
+//    console.log('Factory', node);
+//    console.log('');
     var bfunc = Builder()(node);
 
     /* Some constants, used when stringing together words. */
