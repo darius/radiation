@@ -1,7 +1,7 @@
 body {
-	background: #f2f2f2 url(../img/bg.png);
+	background: #f4ecee url(../img/bg.png);
 	color: #58370E;
-	font-family: Lato, 'Helvetica Neue';
+	font-family: "Open sans", Lato, 'Helvetica Neue';
 	-webkit-font-smoothing: antialiased;
 }
 
@@ -170,4 +170,12 @@ dd {
 	.table td.author {
 		display: none;
 	}
+}
+p {
+	color: #835317;
+	font-size: 18px;
+}
+p.intro{
+	font-style: italic;
+	color: #a3496f;
 }
