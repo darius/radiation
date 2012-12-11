@@ -13,9 +13,34 @@
         <script src="peglet.js"></script>
         <script src="mutagen.js"></script>
         <script src="mutagen_grammar.js"></script>
-        <script type="text/javascript">
+   </head> <body>
+    <div class="container-fluid">
+    <section id="description">
+    <div class="row">
+        <div class="span9 offset1"><h3>Radiation, a mutagen.</h3>
+            <p class="intro">In genetics, a mutagen (Latin, literally origin of change) is a physical or chemical agent that changes the genetic material, usually DNA, of an organism and thus increases the frequency of mutations above the natural background level. As many mutations cause cancer, mutagens are therefore also likely to be carcinogens. Not all mutations are caused by mutagens: so-called "spontaneous mutations" occur due to spontaneous hydrolysis, errors in DNA replication, repair and recombination.</p>
+        </div>
+    </div>
+     <div class="row">
+        <div class="span4 offset1">   <p>Enter thou thy blasted grammar.</p>
+            <br />
+            <input type="text"></input>
+            <br />
+            <br />
+            <p id="charCount"></p>
+            <p id="original"></p>
+            <p id="reversed"></p>
+        </div>
+    </div>
+     <div class="row">
+         <div class="span4 offset1">  
+        </div>
+    </div>
+    </section>
+    </div>
+         <script type="text/javascript">
                 console.log("mandarin");
-            $(document).ready(function(){
+            window.onload = function(){
                 console.log("avocado");
                 function reverseString(string){
                     return string.split("").reverse().join("");
@@ -54,33 +79,8 @@
                 };
                 setupUpdater();
                 document.getElementsByTagName("input")[0].focus();
-            });
+            };
                 console.log("blanket");
         </script>
-    </head> <body>
-    <div class="container-fluid">
-    <section id="description">
-    <div class="row">
-        <div class="span9 offset1"><h3>Radiation, a mutagen.</h3>
-            <p class="intro">In genetics, a mutagen (Latin, literally origin of change) is a physical or chemical agent that changes the genetic material, usually DNA, of an organism and thus increases the frequency of mutations above the natural background level. As many mutations cause cancer, mutagens are therefore also likely to be carcinogens. Not all mutations are caused by mutagens: so-called "spontaneous mutations" occur due to spontaneous hydrolysis, errors in DNA replication, repair and recombination.</p>
-        </div>
-    </div>
-     <div class="row">
-        <div class="span4 offset1">   <p>Enter thou thy blasted grammar.</p>
-            <br />
-            <input type="text"></input>
-            <br />
-            <br />
-            <p id="charCount"></p>
-            <p id="original"></p>
-            <p id="reversed"></p>
-        </div>
-    </div>
-     <div class="row">
-         <div class="span4 offset1">  
-        </div>
-    </div>
-    </section>
-    </div>
     </body>
 </html>
