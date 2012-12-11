@@ -29,26 +29,25 @@
                     oldText = input.value,
                     timeout = null;
 
-            }
-            function handleChange(){
-                var newText = input.value;
-                if (newText == oldText){
-                    return;
+                function handleChange(){
+                    var newText = input.value;
+                    if (newText == oldText){
+                        return;
+                    }
+                    else {
+                        oldText = newText;
+                    }
+                    set(reversed, reverse(newText));
+                    set(count, 'you wrote ' + newText.length + ' characters. ');
+                    set(orig, newText);
                 }
-                else {
-                    oldText = newText;
+                function eventHandler(){
+
+                    if(timeout) clearTimeout(timeout);
+                    timeout = setTimeOut(handleChange, 50);
                 }
-                set(reversed, reverse(newText));
-                set(count, 'you wrote ' + newText.length + ' characters. ');
-                set(orig, newText);
+                input.onkeydown = input.onkeyup = input.onclick = eventHandler;
             }
-            function eventHandler(){
-
-                if(timeout) clearTimeout(timeout);
-                timeout = setTimeOut(handleChange, 50);
-            }
-            input.onkeydown = input.onkeyup = input.onclick = eventHandler;
-
             setupUpdater();
             document.getElementsByTagName("input")[0].focus();
         </script>
