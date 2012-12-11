@@ -14,43 +14,45 @@
         <script src="mutagen.js"></script>
         <script src="mutagen_grammar.js"></script>
         <script type="text/javascript">
-            function reverseString(string){
-                return string.split("").reverse().join("");
-            }
-            function set(element, text){
-                while (element.firstChild){
-                    element.removeChild(element.firstChild);
-                element.appendChild(document.createTextNode(text))}
-            }
-            function setupUpdater(){
-                var input    = document.getElementsByTagName('input')[0],
-                    reversed = document.getElementById('reversed'),
-                    count    = document.getElementById('charCount'),
-                    orig     = document.getElementById('original'),
-                    oldText  = input.value,
-                    timeout  = null;
+            $(document).ready(function(){
+                function reverseString(string){
+                    return string.split("").reverse().join("");
+                };
+                function set(element, text){
+                    while (element.firstChild){
+                        element.removeChild(element.firstChild);
+                    element.appendChild(document.createTextNode(text))}
+                };
+                function setupUpdater(){
+                    var input    = document.getElementsByTagName('input')[0],
+                        reversed = document.getElementById('reversed'),
+                        count    = document.getElementById('charCount'),
+                        orig     = document.getElementById('original'),
+                        oldText  = input.value,
+                        timeout  = null;
 
-                function handleChange(){
-                    var newText = input.value;
-                    if (newText == oldText){
-                        return;
-                    }
-                    else {
-                        oldText = newText;
-                    }
-                    set(reversed, reverse(newText));
-                    set(count, 'you wrote ' + newText.length + ' characters. ');
-                    set(orig, newText);
-                }
-                function eventHandler(){
+                    function handleChange(){
+                        var newText = input.value;
+                        if (newText == oldText){
+                            return;
+                        }
+                        else {
+                            oldText = newText;
+                        }
+                        set(reversed, reverse(newText));
+                        set(count, 'you wrote ' + newText.length + ' characters. ');
+                        set(orig, newText);
+                    };
+                    function eventHandler(){
 
-                    if(timeout) clearTimeout(timeout);
-                    timeout = setTimeOut(handleChange, 50);
-                }
-                input.onkeydown = input.onkeyup = input.onclick = eventHandler;
+                        if(timeout) clearTimeout(timeout);
+                        timeout = setTimeOut(handleChange, 50);
+                    };
+                    input.onkeydown = input.onkeyup = input.onclick = eventHandler;
+                };
+                setupUpdater();
+                document.getElementsByTagName("input")[0].focus();
             }
-            setupUpdater();
-            document.getElementsByTagName("input")[0].focus();
         </script>
     </head> <body>
     <div class="container-fluid">
