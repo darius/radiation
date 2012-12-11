@@ -22,12 +22,12 @@
                 element.appendChild(document.createTextNode(text))}
             }
             function setupUpdater(){
-                var input = document.getElementsByTagName('input')[0],
-                    reversed = document.getElementbyId('reversed'),
-                    count = document.getElementById('charCount'),
-                    orig = document.getElementById(''),
-                    oldText = input.value,
-                    timeout = null;
+                var input    = document.getElementsByTagName('input')[0],
+                    reversed = document.getElementById('reversed'),
+                    count    = document.getElementById('charCount'),
+                    orig     = document.getElementById(''),
+                    oldText  = input.value,
+                    timeout  = null;
 
                 function handleChange(){
                     var newText = input.value;
@@ -51,8 +51,7 @@
             setupUpdater();
             document.getElementsByTagName("input")[0].focus();
         </script>
-    </head>
-    <body>
+    </head> <body>
     <div class="container-fluid">
     <section id="description">
     <div class="row">
