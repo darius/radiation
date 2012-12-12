@@ -122,16 +122,16 @@ function myShuffle() {
 //   conditions.
 eg = "   \
 -female-name- = Emmalissa / Chloe / Tiffani / Eunice / Zoe / Jennifer / Imelda / Yvette / Melantha   \
--male-name- = Bernard / Joseph / Emmett / Ogden / Eugene / Xerxes / Joshua / Lemuel / Etienne   \
+-male-name- = Ryan Koven / Joseph / Emmett / Ogden / Eugene / Xerxes / Joshua / Lemuel / Etienne   \
 -name- = gender{ -male-name- / -female-name- }   \
 -he-she- = gender{ he / she }   \
--person-adjective- = precocious / unflappable / energetic / forceful / inimitable / daring / mild / intense / jaded   \
+-person-adjective- = precociously / unflappable / energetic / forceful / inimitable / daring / mild / intense / jaded   \
 -intensifier- = great / some / considerable / not inconsiderable / distinct / impressive / unique / notable   \
--neutral-descriptor- = toddler / aesthete / writer / artist   \
+-neutral-descriptor- = obese toddler / pompous PHP architect / Fortran trained circus acrobat / rabid fan of Peter Norvig   \
 -male-descriptor- = stalwart / gentleman / boy / youth   \
 -female-descriptor- = young miss / girl / maiden / flapper   \
 -descriptor- = [1] -neutral-descriptor- / [1] (gender{ -male-descriptor- / -female-descriptor- })   \
--descriptor-modifier- = of -intensifier- (perspicacity puked on Darius / fortitude / passion / wit / perception / presence of mind)   \
+-descriptor-modifier- = with -intensifier- (fuzzy pink bath slippers puked on Darius / fortitude / passion / wit / perception / presence of mind)   \
 -comma-description-phrase- = , -a-an- ([1] -person-adjective- / [1] ()) -descriptor- ([1] -descriptor-modifier- / [2] ()) ,   \
 -person-description- = -name- ([2] -comma-description-phrase- / [1] ())   \
 -two-to-six- = two / three / four / five / six / some   \

@@ -24,7 +24,7 @@
      <div class="row">
         <div class="span4 offset1">   <p>Enter thou thy blasted grammar.</p>
             <br />
-            <input type="text"></input>
+            <textarea rows="4" cols="50" placeholder="putteth thy wretched grammar here"></textarea>
             <br />
             <br />
             <p id="charCount"></p>
@@ -60,16 +60,16 @@
                 function setupUpdater(){
 
                     console.log('cats are snorting lines of catnip');
-                    var input    = document.getElementsByTagName('input')[0],
+                    var textarea    = document.getElementsByTagName('textarea')[0],
                         reversed = document.getElementById('reversed'),
                         count    = document.getElementById('charCount'),
                         orig     = document.getElementById('original'),
                         grammarized     = document.getElementById('grammarized'),
-                        oldText  = input.value,
+                        oldText  = textarea.value,
                         timeout  = null;
 
                     function handleChange(){
-                        var newText = input.value;
+                        var newText = textarea.value;
                         if (newText == oldText){
                             return;
                         }
@@ -88,10 +88,10 @@
                         if(timeout) clearTimeout(timeout);
                         timeout = setTimeout(handleChange, 50);
                     };
-                    input.onkeydown = input.onkeyup = input.onclick = eventHandler;
+                    textarea.onkeydown = textarea.onkeyup = textarea.onclick = eventHandler;
                 };
                 setupUpdater();
-                document.getElementsByTagName("input")[0].focus();
+                document.getElementsByTagName("textarea")[0].focus();
             };
                 console.log("blanket");
         </script>
