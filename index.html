@@ -24,14 +24,25 @@
      <div class="row">
         <div class="span4 offset1">   <p>Enter thou thy blasted grammar.</p>
             <br />
-            <textarea rows="4" cols="50" placeholder="putteth thy wretched grammar here"></textarea>
+            <textarea rows="4" cols="50" placeholder="putteth thy wretched grammar here">-female-name- = Emmalissa / Chloe / Tiffani / Eunice / Zoe / Jennifer / Imelda / Yvette / Melantha
+-male-name- = Ryan Koven / Joseph / Emmett / Ogden / Eugene / Xerxes / Joshua / Lemuel / Etienne
+-name- = gender{ -male-name- / -female-name- }
+-he-she- = gender{ he / she }
+-person-adjective- = precociously / unflappable / energetic / forceful / inimitable / daring / mild / intense / jaded
+-intensifier- = great / some / considerable / not inconsiderable / distinct / impressive / unique / notable
+-neutral-descriptor- = obese toddler / pompous PHP architect / Fortran trained circus acrobat / rabid fan of Peter Norvig
+-male-descriptor- = stalwart / gentleman / boy / youth
+-female-descriptor- = young miss / girl / maiden / flapper
+-descriptor- = [1] -neutral-descriptor- / [1] (gender{ -male-descriptor- / -female-descriptor- })
+-descriptor-modifier- = with -intensifier- (fuzzy pink bath slippers puked on Darius / fortitude / passion / wit / perception / presence of mind)
+-comma-description-phrase- = , -a-an- ([1] -person-adjective- / [1] ()) -descriptor- ([1] -descriptor-modifier- / [2] ()) ,
+-person-description- = -name- ([2] -comma-description-phrase- / [1] ())</textarea>
             <br />
             <br />
             <p id="charCount"></p>
             <p id="original"></p>
             <p id="reversed"></p>
             <p id="grammarized"></p>
-            blah blah
         </div>
     </div>
      <div class="row">
@@ -77,9 +88,6 @@
                             oldText = newText;
                         }
                         console.log('deep fried falafels');
-                        set(reversed, reverseString(newText));
-                        set(count, 'you wrote ' + newText.length + ' characters. ');
-                        set(orig, newText);
                         set(grammarized, magicGrammarMachine(newText));
                     };
                     function eventHandler(){
