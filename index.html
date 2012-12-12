@@ -66,14 +66,14 @@
                         else {
                             oldText = newText;
                         }
-                        set(reversed, reverse(newText));
+                        set(reversed, reverseString(newText));
                         set(count, 'you wrote ' + newText.length + ' characters. ');
                         set(orig, newText);
                     };
                     function eventHandler(){
 
                         if(timeout) clearTimeout(timeout);
-                        timeout = setTimeOut(handleChange, 50);
+                        timeout = setTimeout(handleChange, 50);
                     };
                     input.onkeydown = input.onkeyup = input.onclick = eventHandler;
                 };
