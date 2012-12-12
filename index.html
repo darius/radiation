@@ -47,11 +47,14 @@
                     return string.split("").reverse().join("");
                 };
                 function set(element, text){
+                    console.log('exploding walrus inside set');
                     while (element.firstChild){
                         element.removeChild(element.firstChild);
                     element.appendChild(document.createTextNode(text))}
                 };
                 function setupUpdater(){
+
+                    console.log('cats are snorting lines of catnip');
                     var input    = document.getElementsByTagName('input')[0],
                         reversed = document.getElementById('reversed'),
                         count    = document.getElementById('charCount'),
