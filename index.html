@@ -30,6 +30,7 @@
             <p id="charCount"></p>
             <p id="original"></p>
             <p id="reversed"></p>
+            <p id="grammarized"></p>
             blah blah
         </div>
     </div>
@@ -46,6 +47,10 @@
                 function reverseString(string){
                     return string.split("").reverse().join("");
                 };
+
+                function magicGrammarMachine(string){
+                    return function()(return string);
+                };
                 function set(element, text){
                     console.log('exploding walrus inside set');
                     while(element.firstChild)element.removeChild(element.firstChild);
@@ -59,6 +64,7 @@
                         reversed = document.getElementById('reversed'),
                         count    = document.getElementById('charCount'),
                         orig     = document.getElementById('original'),
+                        grammarized     = document.getElementById('grammarized'),
                         oldText  = input.value,
                         timeout  = null;
 
@@ -74,6 +80,7 @@
                         set(reversed, reverseString(newText));
                         set(count, 'you wrote ' + newText.length + ' characters. ');
                         set(orig, newText);
+                        set(grammarized, magicGrammarMachine(newText));
                     };
                     function eventHandler(){
 
