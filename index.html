@@ -22,9 +22,9 @@
         </div>
     </div>
      <div class="row">
-        <div class="span4 offset1">   <p>Enter thou thy blasted grammar.</p>
+        <div class="span9 offset1">   <p>Enter thou thy blasted grammar.</p>
             <br />
-            <textarea rows="4" cols="50" placeholder="putteth thy wretched grammar here">-female-name- = Emmalissa / Chloe / Tiffani / Eunice / Zoe / Jennifer / Imelda / Yvette / Melantha
+            <textarea rows="4" cols="150" placeholder="putteth thy wretched grammar here">-female-name- = Emmalissa / Chloe / Tiffani / Eunice / Zoe / Jennifer / Imelda / Yvette / Melantha
 -male-name- = Ryan Koven / Joseph / Emmett / Ogden / Eugene / Xerxes / Joshua / Lemuel / Etienne
 -name- = gender{ -male-name- / -female-name- }
 -he-she- = gender{ he / she }
@@ -60,6 +60,10 @@
                 };
 
                 function magicGrammarMachine(string){
+                    rules = mutagenParse(string);
+                    console.log("blanket");
+                    var factory = Factory(rules['-person-description-']);
+                    var str = factory(0);
                     return str;
                 };
                 function set(element, text){
@@ -101,7 +105,7 @@
                 setupUpdater();
                 document.getElementsByTagName("textarea")[0].focus();
             };
-                console.log("blanket");
+
         </script>
     </body>
 </html>
