@@ -53,6 +53,7 @@ _       = \\s*                             \
                 int: parseInt,
                 setDefn: function(name, defn) {
                     rules[name] = defn;
+                    rules.startRule = name;
                     return [name, defn];
                 },
                 mkChoice : function() { return myWeighted.apply(null, arguments); },
@@ -167,6 +168,7 @@ eg = "   \
 -root- = -gorey-fate-   \
 ";
 rules = mutagenParse(eg);
+console.log(rules.startRule);
 var factory = Factory(rules['-person-description-']);
 var str = factory(0);
 console.log(str);
