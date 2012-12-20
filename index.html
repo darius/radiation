@@ -34,9 +34,40 @@
 -male-descriptor- = stalwart / gentleman / boy / youth
 -female-descriptor- = young miss / girl / maiden / flapper
 -descriptor- = [1] -neutral-descriptor- / [1] (gender{ -male-descriptor- / -female-descriptor- })
--descriptor-modifier- = with -intensifier- (fuzzy pink bath slippers puked on Darius / fortitude / passion / wit / perception / presence of mind)
+-descriptor-modifier- = with -intensifier- (fuzzy pink bath slippers / fortitude / passion / wit / perception / presence of mind)
 -comma-description-phrase- = , -a-an- ([1] -person-adjective- / [1] ()) -descriptor- ([1] -descriptor-modifier- / [2] ()) ,
--person-description- = -name- ([2] -comma-description-phrase- / [1] ())</textarea>
+-person-description- = -name- ([2] -comma-description-phrase- / [1] ())
+-two-to-six- = two / three / four / five / six / some
+-day-weather- = [1] (rainy / foggy / blistering / blustery / gloomy / dank) / [2] ()
+-time-unit- = week / month / season
+-day-part- = day / afternoon / morning / evening
+-day-of-week- = Monday / Tuesday / Wednesday / Thursday / Friday / Saturday
+-holiday- = Christmas / Boxing Day / St. Swithin's Day
+-travel-place- = Mozambique / Uganda / the Seychelles / the Vatican / Peoria / Borneo / Antarctica / Somerville / Northumberland / Saxony / Brugges / Gondwanaland
+-travel-time- = ([2] while / [1] whilst) (on safari to / exploring / on an expedition to / hunting in / on sabbatical in) -travel-place-
+-time- = longtime{ one -day-weather- -day-part- / one -day-weather- -day-part- last -time-unit- / last -day-of-week- / last -time-unit- / -a-an- -time-unit- ago / on -holiday- / last -holiday- / -a-an- -time-unit- ago -holiday- / -two-to-six- -time-unit- -adjoining- s ago / -travel-time- }
+-maybe-comma- = [2] () / [1] ,
+-time-comma- = longtime{ -maybe-comma- / , / -maybe-comma- / -maybe-comma- / -maybe-comma- / -maybe-comma- / -maybe-comma- / , }
+-passive-action-word- = exploded / vaporized / melted / sublimated / evaporated / transformed / calcified / vanished / faded / disappeared / shrivelled / bloated / liquefied / was lost / was misplaced / was bartered
+-dest-noun- = solidity{ slime / stew / secretion / mist / smoke / dust / vapor }
+-dest-modifier- = noisome / pearlescent / foul / fetid / glittering / dark / briny / glistening / cloying
+-dest-form- = solidity{ puddle / bucket / vat / heap / cloud / waft }
+-action-result- = -dest-noun- / -dest-modifier- -dest-noun- / -a-an- -dest-noun- / -a-an- -dest-modifier- -dest-noun- / -a-an- -dest-form- of -dest-noun- / -a-an- -dest-form- of -dest-modifier- -dest-noun- / -a-an- -dest-modifier- -dest-form- of -dest-noun-
+-passive-action-qualifier- = away / at sea / without a trace / unexpectedly / mysteriously / into -action-result- / (away into) -action-result-
+-passive-action- = -passive-action-word- ([2] -passive-action-qualifier- / [3] ())
+-active-action-word- = fell / tumbled / disappeared / plummeted / vanished / dropped
+-active-action-prep-hi- = down from / off / from
+-active-action-prep-lo- = down / into
+-active-action-prep- = altitude{ -active-action-prep-hi- / -active-action-prep-lo- }
+-active-action-target-hi- = tower / cliff / ruin / pillar / treehouse / garret
+-active-action-target-lo- = well / hole / cave / oubliette / cellar / pit
+-active-action-target- = altitude{ -active-action-target-hi- / -active-action-target-lo- }
+-target-air- = disreputable / peculiar / mysterious / banal
+-target-age- = old / moldering / aged / antiquated
+-active-action- = -active-action-word- -active-action-prep- -a-an- ([1] -target-air- / [2] ()) ([1] -target-age- / [2] ()) -active-action-target-
+-action- = -passive-action- / -active-action-
+-gorey-fate- = [2] -person-description- -action- -time- / [2] -time- -time-comma- -person-description- -action- / [1] (it was) -time- that -person-description- -action-
+</textarea>
             <br />
             <br />
             <p id="charCount"></p>
@@ -62,7 +93,7 @@
                 function magicGrammarMachine(string){
                     rules = mutagenParse(string);
                     console.log("blanket");
-                    var factory = Factory(rules['-person-description-']);
+                    var factory = Factory(rules['-gorey-fate-']);
                     var str = factory(0);
                     return str;
                 };
