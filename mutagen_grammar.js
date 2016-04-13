@@ -167,8 +167,7 @@ eg = "   \
 -gorey-fate- = [2] -person-description- -action- -time- / [2] -time- -time-comma- -person-description- -action- / [1] (it was) -time- that -person-description- -action-   \
 -root- = -gorey-fate-   \
 ";
-rules = mutagenParse(eg);
-console.log(rules.startRule);
-var factory = Factory(rules['-person-description-']);
-var str = factory(0);
-console.log(str);
+if (false) {
+    rules = mutagenParse(eg);
+    console.log(Factory(rules['-person-description-'])(0));
+}
