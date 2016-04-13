@@ -1,5 +1,5 @@
 body {
-	background: #f4ecee url(../img/bg.png);
+	background: #f4ecee; /*url(../img/bg.png); */
 	color: #58370E;
 	font-family: "Open sans", Lato, 'Helvetica Neue';
 	-webkit-font-smoothing: antialiased;
