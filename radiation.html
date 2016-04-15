@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge, chrome=1" />
+    <title>Radiation</title>
+    <link href="css/main.css" rel="stylesheet">
+    <script src="peglet.js"></script>
+    <script src="mutagen.js"></script>
+    <script src="mutagen_grammar.js"></script>
+    <script src="radiation.js"></script>
+  </head>
+  <body>
+    <div class="container-fluid">
+      <section id="description">
+        <div class="row">
+          <div class="span9 offset1">   <p>Enter a grammar:</p>
+            <br />
+            <textarea rows="20" style="width: 70em" placeholder="putteth thy wretched grammar here">-female-name- = Emmalissa / Chloe / Tiffani / Eunice / Zoe / Jennifer / Imelda / Yvette / Melantha
+-male-name- = Ryan Koven / Joseph / Emmett / Ogden / Eugene / Xerxes / Joshua / Lemuel / Etienne
+-name- = gender{ -male-name- / -female-name- }
+-he-she- = gender{ he / she }
+-person-adjective- = precociously / unflappable / energetic / forceful / inimitable / daring / mild / intense / jaded
+-intensifier- = great / some / considerable / not inconsiderable / distinct / impressive / unique / notable
+-neutral-descriptor- = obese toddler / pompous PHP architect / Fortran trained circus acrobat / rabid fan of Peter Norvig
+-male-descriptor- = stalwart / gentleman / boy / youth
+-female-descriptor- = young miss / girl / maiden / flapper
+-descriptor- = [1] -neutral-descriptor- / [1] (gender{ -male-descriptor- / -female-descriptor- })
+-descriptor-modifier- = with -intensifier- (fuzzy pink bath slippers / fortitude / passion / wit / perception / presence of mind)
+-comma-description-phrase- = , -a-an- ([1] -person-adjective- / [1] ()) -descriptor- ([1] -descriptor-modifier- / [2] ()) ,
+-person-description- = -name- ([2] -comma-description-phrase- / [1] ())
+-two-to-six- = two / three / four / five / six / some
+-day-weather- = [1] (rainy / foggy / blistering / blustery / gloomy / dank) / [2] ()
+-time-unit- = week / month / season
+-day-part- = day / afternoon / morning / evening
+-day-of-week- = Monday / Tuesday / Wednesday / Thursday / Friday / Saturday
+-holiday- = Christmas / Boxing Day / St. Swithin's Day
+-travel-place- = Mozambique / Uganda / the Seychelles / the Vatican / Peoria / Borneo / Antarctica / Somerville / Northumberland / Saxony / Brugges / Gondwanaland
+-travel-time- = ([2] while / [1] whilst) (on safari to / exploring / on an expedition to / hunting in / on sabbatical in) -travel-place-
+-time- = longtime{ one -day-weather- -day-part- / one -day-weather- -day-part- last -time-unit- / last -day-of-week- / last -time-unit- / -a-an- -time-unit- ago / on -holiday- / last -holiday- / -a-an- -time-unit- ago -holiday- / -two-to-six- -time-unit- -adjoining- s ago / -travel-time- }
+-maybe-comma- = [2] () / [1] ,
+-time-comma- = longtime{ -maybe-comma- / , / -maybe-comma- / -maybe-comma- / -maybe-comma- / -maybe-comma- / -maybe-comma- / , }
+-passive-action-word- = exploded / vaporized / melted / sublimated / evaporated / transformed / calcified / vanished / faded / disappeared / shrivelled / bloated / liquefied / was lost / was misplaced / was bartered
+-dest-noun- = solidity{ slime / stew / secretion / mist / smoke / dust / vapor }
+-dest-modifier- = noisome / pearlescent / foul / fetid / glittering / dark / briny / glistening / cloying
+-dest-form- = solidity{ puddle / bucket / vat / heap / cloud / waft }
+-action-result- = -dest-noun- / -dest-modifier- -dest-noun- / -a-an- -dest-noun- / -a-an- -dest-modifier- -dest-noun- / -a-an- -dest-form- of -dest-noun- / -a-an- -dest-form- of -dest-modifier- -dest-noun- / -a-an- -dest-modifier- -dest-form- of -dest-noun-
+-passive-action-qualifier- = away / at sea / without a trace / unexpectedly / mysteriously / into -action-result- / (away into) -action-result-
+-passive-action- = -passive-action-word- ([2] -passive-action-qualifier- / [3] ())
+-active-action-word- = fell / tumbled / disappeared / plummeted / vanished / dropped
+-active-action-prep-hi- = down from / off / from
+-active-action-prep-lo- = down / into
+-active-action-prep- = altitude{ -active-action-prep-hi- / -active-action-prep-lo- }
+-active-action-target-hi- = tower / cliff / ruin / pillar / treehouse / garret
+-active-action-target-lo- = well / hole / cave / oubliette / cellar / pit
+-active-action-target- = altitude{ -active-action-target-hi- / -active-action-target-lo- }
+-target-air- = disreputable / peculiar / mysterious / banal
+-target-age- = old / moldering / aged / antiquated
+-active-action- = -active-action-word- -active-action-prep- -a-an- ([1] -target-air- / [2] ()) ([1] -target-age- / [2] ()) -active-action-target-
+-action- = -passive-action- / -active-action-
+-gorey-fate- = [2] -person-description- -action- -time- / [2] -time- -time-comma- -person-description- -action- / [1] (it was) -time- that -person-description- -action-
+</textarea>
+            <br />
+            <br />
+            <p id="charCount"></p>
+            <p id="original"></p>
+            <p id="reversed"></p>
+            <p id="grammarized"></p>
+          </div>
+        </div>
+      </section>
+    </div>
+  </body>
+</html>
